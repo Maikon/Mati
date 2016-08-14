@@ -4,7 +4,7 @@ defmodule BuildRegularFileListTest do
 
   setup do
     directory_1 = "test/example_dir"
-    directory_2 = directory_1 <> "/another_dir"
+    directory_2 = directory_1 <> "/nested_dir"
     file_1 = Path.absname(directory_1 <> "/" <> "file_1.txt")
     file_2 = Path.absname(directory_2 <> "/" <> "file_2.txt")
 
@@ -26,6 +26,10 @@ defmodule BuildRegularFileListTest do
   describe "building a list of files" do
     test "recursively adds only regular files", %{dir_1: d1, file_1: f1, file_2: f2} do
       assert BuildRegularFileList.execute(d1) == [f1, f2]
+    end
+
+    test "files can be ignored from the final list", %{dir_1: d1, file_1: f1} do
+      assert BuildRegularFileList.execute(d1, ["nested_dir"]) == [f1]
     end
   end
 end
