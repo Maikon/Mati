@@ -1,4 +1,5 @@
 defmodule Periscope.FileStats do
+  defstruct name: "", commits: 0, line_count: 0
 
   def line_count(file) do
     {:ok, contents} = File.read(file)
