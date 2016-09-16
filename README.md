@@ -1,5 +1,7 @@
 # Periscope
 
+[![CircleCI](https://circleci.com/gh/Maikon/Periscope/tree/master.svg?style=svg&circle-token=59e949fea2dc4490733acf76160f25aa3aad1646)](https://circleci.com/gh/Maikon/Periscope/tree/master)
+
 A command line utility that provides a detailed and quick overview of your
 project. The goal is to indicate the main components of the app but also to
 indicate possible problematic areas.
