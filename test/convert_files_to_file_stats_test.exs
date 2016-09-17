@@ -1,6 +1,6 @@
 defmodule ConvertFilesToFileStatsTest do
   use ExUnit.Case
-  alias Periscope.ConvertFilesToFileStats
+  alias Mati.ConvertFilesToFileStats
 
   setup do
     file_1 = Path.absname("file_1.txt")

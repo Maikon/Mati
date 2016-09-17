@@ -1,2 +1,2 @@
-defmodule Periscope do
+defmodule Mati do
 end

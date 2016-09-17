@@ -1,7 +1,7 @@
 defmodule DisplayTest do
   use ExUnit.Case
-  alias Periscope.Display
-  alias Periscope.FileStats
+  alias Mati.Display
+  alias Mati.FileStats
 
   test "builds the table for a list of files" do
     file_1 = %FileStats{name: "file_1", line_count: 10, commits: 10}

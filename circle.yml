@@ -14,4 +14,4 @@ test:
   override:
     - mix test
     - mkdir -p $CIRCLE_TEST_REPORTS/exunit
-    - mv _build/test/lib/periscope/test-junit-report.xml $CIRCLE_TEST_REPORTS/exunit
+    - mv _build/test/lib/mati/test-junit-report.xml $CIRCLE_TEST_REPORTS/exunit
