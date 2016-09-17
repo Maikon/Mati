@@ -1,4 +1,4 @@
-defmodule Periscope.Display do
+defmodule Mati.Display do
   alias IO.ANSI
   require Integer
   @default_max_width 15

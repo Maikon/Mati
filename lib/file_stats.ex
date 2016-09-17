@@ -1,4 +1,4 @@
-defmodule Periscope.FileStats do
+defmodule Mati.FileStats do
   defstruct name: "", commits: 0, line_count: 0
 
   def line_count(file) do

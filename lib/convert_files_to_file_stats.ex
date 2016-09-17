@@ -1,5 +1,5 @@
-defmodule Periscope.ConvertFilesToFileStats do
-  alias Periscope.FileStats
+defmodule Mati.ConvertFilesToFileStats do
+  alias Mati.FileStats
 
   def convert(files) do
     Enum.map(files, fn(file) ->

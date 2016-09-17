@@ -1,6 +1,6 @@
 defmodule BuildRegularFileListTest do
   use ExUnit.Case
-  alias Periscope.BuildRegularFileList
+  alias Mati.BuildRegularFileList
 
   setup do
     directory_1 = "test/example_dir"

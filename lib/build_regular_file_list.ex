@@ -1,4 +1,4 @@
-defmodule Periscope.BuildRegularFileList do
+defmodule Mati.BuildRegularFileList do
 
   def execute(directory, ignored_files \\ []) do
     find_regular_files([directory], [], ignored_files)
