@@ -1,6 +1,6 @@
-defmodule BuildRegularFileListTest do
+defmodule Mati.BuildFileListTest do
   use ExUnit.Case
-  alias Mati.BuildRegularFileList
+  alias Mati.BuildFileList
 
   setup do
     directory_1 = "test/example_dir"
@@ -25,11 +25,11 @@ defmodule BuildRegularFileListTest do
 
   describe "building a list of files" do
     test "recursively adds only regular files", %{dir_1: d1, file_1: f1, file_2: f2} do
-      assert BuildRegularFileList.execute(d1) == [f1, f2]
+      assert BuildFileList.execute(d1) == [f1, f2]
     end
 
     test "files can be ignored from the final list", %{dir_1: d1, file_1: f1} do
-      assert BuildRegularFileList.execute(d1, ["nested_dir"]) == [f1]
+      assert BuildFileList.execute(d1, ["nested_dir"]) == [f1]
     end
   end
 end

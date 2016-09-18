@@ -1,4 +1,4 @@
-defmodule Mati.BuildRegularFileList do
+defmodule Mati.BuildFileList do
 
   def execute(directory, ignored_files \\ []) do
     find_regular_files([directory], [], ignored_files)
