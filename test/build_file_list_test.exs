@@ -24,12 +24,19 @@ defmodule Mati.BuildFileListTest do
   end
 
   describe "building a list of files" do
-    test "recursively adds only regular files", %{dir_1: d1, file_1: f1, file_2: f2} do
+    test "recursively adds regular files", %{dir_1: d1, file_1: f1, file_2: f2} do
       assert BuildFileList.execute(d1) == [f1, f2]
     end
 
-    test "files can be ignored from the final list", %{dir_1: d1, file_1: f1} do
+    test "directories can be ignored from the final list", %{dir_1: d1, file_1: f1} do
       assert BuildFileList.execute(d1, ["nested_dir"]) == [f1]
+    end
+
+    test "files with certain extensions can be ignored from the final list", %{dir_1: d1, file_1: f1, file_2: f2} do
+      result = BuildFileList.execute(d1, [], ".txt")
+
+      refute Enum.member?(result, f1)
+      refute Enum.member?(result, f2)
     end
   end
 end
