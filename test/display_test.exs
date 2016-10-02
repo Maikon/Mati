@@ -18,6 +18,16 @@ defmodule DisplayTest do
     assert result =~ "12"
   end
 
+  test "table includes a default header" do
+    file = %FileStats{name: "file", line_count: 0, commits: 0}
+
+    result = Display.build_table([file])
+
+    assert result =~ "File"
+    assert result =~ "Line Count"
+    assert result =~ "Commits"
+  end
+
   test "the table columns have default width" do
     file_1 = %FileStats{name: "file", line_count: 0, commits: 0}
     files = [file_1]
