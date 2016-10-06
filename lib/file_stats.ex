@@ -2,11 +2,16 @@ defmodule Mati.FileStats do
   defstruct name: "", commits: 0, line_count: 0
 
   def convert_from_regular_files(files) do
-    Enum.map(files, fn(file) ->
-      %Mati.FileStats{name: name(file),
-                      commits: commits(file),
-                      line_count: lines(file)}
+    files
+    |> Experimental.Flow.from_enumerable()
+    |> Experimental.Flow.partition()
+    |> Experimental.Flow.map(fn(file) ->
+        %Mati.FileStats{name: name(file),
+                        commits: commits(file),
+                        line_count: lines(file)}
     end)
+    |> Enum.into([])
+    |> List.flatten
   end
 
   def sort_by_churn(file_stats) do
@@ -31,7 +36,7 @@ defmodule Mati.FileStats do
   defp lines(file),   do: file |> line_count
 
   defp by_churn_value(stat_1, stat_2) do
-    (stat_1.line_count + stat_1.commits) > (stat_2.line_count + stat_2.commits)
+    (stat_1.line_count > stat_2.line_count) && (stat_1.commits > stat_2.commits)
   end
 
   defp git_log(file) do

@@ -12,7 +12,7 @@ defmodule Mati.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :gen_stage]]
   end
 
   def escript do
@@ -22,6 +22,7 @@ defmodule Mati.Mixfile do
   defp deps do
     [
       {:junit_formatter, "~> 1.1.0", only: :test},
+      {:gen_stage, "~> 0.4"}
     ]
   end
 end

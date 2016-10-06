@@ -1,1 +1,2 @@
-%{"junit_formatter": {:hex, :junit_formatter, "1.1.0", "dbffc4f8123a57bd167e99223aca1b3bbeaa4aede9b5151cfd5739d21001c9cf", [:mix], []}}
+%{"gen_stage": {:hex, :gen_stage, "0.6.1", "1e05e3faf9e505dcdb1e6d2da501fc5d1724e7ea6176bf72853ea78c8a600d1c", [:mix], []},
+  "junit_formatter": {:hex, :junit_formatter, "1.1.0", "dbffc4f8123a57bd167e99223aca1b3bbeaa4aede9b5151cfd5739d21001c9cf", [:mix], []}}

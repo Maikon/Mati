@@ -17,5 +17,4 @@ erl_crash.dump
 *.ez
 program_flow.umd
 .DS_Store
-*.png
-*.jpg
+
