@@ -7,9 +7,14 @@ defmodule Mati.Display do
     longest_filename = longest_filename_with_padding(files)
     {header_size, header_with_separator} = build_header(longest_filename)
 
-    Enum.reduce(files, header_with_separator, fn(file, table) ->
-      table
-      <> build_column(clean_filename(file.name), longest_filename)
+    Enum.reduce(files, [header_with_separator], fn(file, table) ->
+      table ++ construct_line_from_file(file, longest_filename, header_size)
+    end)
+  end
+
+  defp construct_line_from_file(file, longest_filename, header_size) do
+    [
+      build_column(clean_filename(file.name), longest_filename)
       <> "|"
       <> build_column(to_string(file.line_count))
       <> "|"
@@ -17,9 +22,10 @@ defmodule Mati.Display do
       <> "\n"
       <> yellow(replicate("-", header_size))
       <> "\n"
-    end)
+    ]
   end
 
+  defp longest_filename_with_padding([]), do: @default_max_width
   defp longest_filename_with_padding(files) do
     extra_padding = 5
 
