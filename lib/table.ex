@@ -1,4 +1,4 @@
-defmodule Mati.Display do
+defmodule Mati.Table do
   alias IO.ANSI
   require Integer
   @default_max_width 15

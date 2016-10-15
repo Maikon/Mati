@@ -1,10 +1,10 @@
-defmodule DisplayTest do
+defmodule TableTest do
   use ExUnit.Case
-  alias Mati.Display
+  alias Mati.Table
   alias Mati.FileStats
 
   test "table includes a header with titles" do
-    result = Display.build_table([]) |> extract_line_at_position(0)
+    result = Table.build_table([]) |> extract_line_at_position(0)
 
     assert result =~ "File"
     assert result =~ "Line Count"
@@ -16,7 +16,7 @@ defmodule DisplayTest do
     file_2 = %FileStats{name: "file_2", line_count: 12, commits: 12}
     files = [file_1, file_2]
 
-    result = Display.build_table(files)
+    result = Table.build_table(files)
     file_1_line = extract_line_at_position(result, 1)
     file_2_line = extract_line_at_position(result, 2)
 
@@ -33,7 +33,7 @@ defmodule DisplayTest do
     file_2 = %FileStats{name: "file_2", line_count: 12, commits: 12}
     files = [file_1, file_2]
 
-    result = Display.build_table(files)
+    result = Table.build_table(files)
     file_1_line = extract_line_at_position(result, 1)
     file_2_line = extract_line_at_position(result, 2)
 
@@ -44,7 +44,7 @@ defmodule DisplayTest do
     file_1 = %FileStats{name: "file", line_count: 0, commits: 0}
     files = [file_1]
 
-    result = Display.build_table(files) |> extract_line_at_position(1)
+    result = Table.build_table(files) |> extract_line_at_position(1)
 
     assert result =~ "file   |       0       |       0"
   end
@@ -53,7 +53,7 @@ defmodule DisplayTest do
     file_1 = %FileStats{name: "./file", line_count: 0, commits: 0}
     files = [file_1]
 
-    result = Display.build_table(files) |> extract_line_at_position(1)
+    result = Table.build_table(files) |> extract_line_at_position(1)
 
     refute result =~ "./"
   end
