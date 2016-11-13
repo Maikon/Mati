@@ -73,4 +73,30 @@ defmodule Mati.ArgumentsParserTest do
       assert result == []
     end
   end
+
+  describe "extracting number of files to show" do
+    test "returns the number when the flag is present" do
+      args = [files: "20"]
+
+      result = ArgumentsParser.extract_number_of_files(args)
+
+      assert result == 20
+    end
+
+    test "returns a default when the flag is not present" do
+      args = []
+
+      result = ArgumentsParser.extract_number_of_files(args)
+
+      assert result == 10
+    end
+
+    test "can return all" do
+      args = [files: "all"]
+
+      result = ArgumentsParser.extract_number_of_files(args)
+
+      assert result == :all
+    end
+  end
 end

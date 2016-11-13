@@ -14,10 +14,19 @@ defmodule Mati.ArgumentsParser do
     |> Enum.map(&remove_leading_slash/1)
   end
 
+  def extract_number_of_files(args) do
+    Keyword.fetch(args, :files)
+    |> extract_number
+  end
+
   def extract_ignored_patterns(args) do
     Keyword.fetch(args, :ignore)
     |> extract_extensions
   end
+
+  defp extract_number({:ok, "all"}), do: :all
+  defp extract_number({:ok, num}), do: String.to_integer(num)
+  defp extract_number(:error), do: 10
 
   defp extract_dir({:ok, dir}), do: dir
   defp extract_dir(:error), do: ""
