@@ -1,6 +1,7 @@
 machine:
   environment:
     PATH: "$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+    LC_ALL: "en_US.UTF-8"
 
 dependencies:
   cache_directories:
@@ -12,6 +13,4 @@ dependencies:
 
 test:
   override:
-    - mix test --no-start
-    - mkdir -p $CIRCLE_TEST_REPORTS/exunit
-    - mv _build/test/lib/mati/test-junit-report.xml $CIRCLE_TEST_REPORTS/exunit
+    - mix test
