@@ -40,14 +40,4 @@ defmodule Mati.ScreenTest do
     assert result =~ "file_2"
     refute result =~ "ignored"
   end
-
-
-  test "displays a specific number of files" do
-    args = [target: "test/example", ignore: "ignored", files: "1"]
-
-    result = Screen.display_table(args) |> Enum.join("\n")
-
-    assert result =~ "file_2"
-    refute result =~ "file_1"
-  end
 end
