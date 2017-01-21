@@ -34,15 +34,14 @@ defmodule FileStatsTest do
   end
 
   test "can provide the line count for a given file" do
-    assert FileStats.line_count("test/test_file.txt") == 4
+    assert FileStats.line_count("test/some_test_file.txt") == 4
   end
 
   test "provides the commit count for a given file" do
-    commits = FileStats.file_commits("test/test_file.txt")
+    commits = FileStats.file_commits("test/some_test_file.txt")
 
-    assert 2 = length(commits)
+    assert 1 = length(commits)
     assert "commit" <> _sha = List.first(commits)
-    assert "commit" <> _sha = List.last(commits)
   end
 
   test "sorts the stats based on the combined value of line and commit count" do
