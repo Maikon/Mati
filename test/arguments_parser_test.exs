@@ -32,12 +32,28 @@ defmodule Mati.ArgumentsParserTest do
       assert result == "target_dir"
     end
 
-    test "returns empty if one is not provided" do
+    test "returns home directory if flag is not provided" do
       args = [invalid: "input"]
 
       result = ArgumentsParser.extract_directory(args)
 
-      assert result == ""
+      assert result == "."
+    end
+
+    test "returns home directory if one is not provided" do
+      args = [target: true]
+
+      result = ArgumentsParser.extract_directory(args)
+
+      assert result == "."
+    end
+
+    test "returns home directory if value provided is empty" do
+      args = [target: ""]
+
+      result = ArgumentsParser.extract_directory(args)
+
+      assert result == "."
     end
   end
 
@@ -56,7 +72,7 @@ defmodule Mati.ArgumentsParserTest do
     end
   end
 
-  describe "extracting file extensions from command line arguments" do
+  describe "extracting file extensions to ignore from command line arguments" do
     test "returns file extensions that should be ignored" do
       args = [ignore: "jpg,txt,png"]
 
@@ -72,6 +88,22 @@ defmodule Mati.ArgumentsParserTest do
 
       assert result == []
     end
+
+    test "returns an empty list if flag is provided without a value" do
+      args = [ignore: true]
+
+      result = ArgumentsParser.extract_ignored_patterns(args)
+
+      assert result == []
+    end
+
+    test "returns an empty list if flag is provided without an empty value" do
+      args = [ignore: ""]
+
+      result = ArgumentsParser.extract_ignored_patterns(args)
+
+      assert result == []
+    end
   end
 
   describe "extracting number of files to show" do
@@ -81,6 +113,14 @@ defmodule Mati.ArgumentsParserTest do
       result = ArgumentsParser.extract_number_of_files(args)
 
       assert result == 20
+    end
+
+    test "returns a default when the flag is passed with an empty value" do
+      args = [files: true]
+
+      result = ArgumentsParser.extract_number_of_files(args)
+
+      assert result == 10
     end
 
     test "returns a default when the flag is not present" do

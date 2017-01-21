@@ -1,4 +1,7 @@
 defmodule Mati.ArgumentsParser do
+  @home_dir "."
+  @no_extensions []
+  @default_number_of_files 10
 
   def extract_directory(args) do
     Keyword.fetch(args, :target)
@@ -25,14 +28,19 @@ defmodule Mati.ArgumentsParser do
   end
 
   defp extract_number({:ok, "all"}), do: :all
+  defp extract_number({:ok, true}), do: @default_number_of_files
   defp extract_number({:ok, num}), do: String.to_integer(num)
-  defp extract_number(:error), do: 10
+  defp extract_number(:error), do: @default_number_of_files
 
+  defp extract_dir({:ok, true}), do: @home_dir
+  defp extract_dir({:ok, ""}), do: @home_dir
+  defp extract_dir(:error), do: @home_dir
   defp extract_dir({:ok, dir}), do: dir
-  defp extract_dir(:error), do: ""
 
+  defp extract_extensions({:ok, true}), do: @no_extensions
+  defp extract_extensions({:ok, ""}), do: @no_extensions
+  defp extract_extensions(:error), do: @no_extensions
   defp extract_extensions({:ok, extensions}), do: String.split(extensions, ",")
-  defp extract_extensions(:error), do: []
 
   defp remove_leading_slash(file) do
     String.replace_leading(file, "/", "")
