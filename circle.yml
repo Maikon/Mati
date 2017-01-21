@@ -12,6 +12,6 @@ dependencies:
 
 test:
   override:
-    - mix test
+    - mix test --no-start
     - mkdir -p $CIRCLE_TEST_REPORTS/exunit
     - mv _build/test/lib/mati/test-junit-report.xml $CIRCLE_TEST_REPORTS/exunit
