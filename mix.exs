@@ -21,7 +21,6 @@ defmodule Mati.Mixfile do
 
   defp deps do
     [
-      {:junit_formatter, "~> 1.1.0", only: :test},
       {:gen_stage, "~> 0.4"}
     ]
   end
