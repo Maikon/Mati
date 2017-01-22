@@ -12,8 +12,8 @@ defmodule TableTest do
   end
 
   test "table gets build from a list of files" do
-    file_1 = %FileStats{name: "file_1", line_count: 10, commits: 10}
-    file_2 = %FileStats{name: "file_2", line_count: 12, commits: 12}
+    file_1 = build_filestat("file_1", 10, 10)
+    file_2 = build_filestat("file_2", 12, 12)
     files = [file_1, file_2]
 
     result = Table.build_table(files)
@@ -29,8 +29,8 @@ defmodule TableTest do
   end
 
   test "the lines from the generated table have the same length" do
-    file_1 = %FileStats{name: "file_1", line_count: 10, commits: 10}
-    file_2 = %FileStats{name: "file_2", line_count: 12, commits: 12}
+    file_1 = build_filestat("file_1", 10, 10)
+    file_2 = build_filestat("file_2", 12, 12)
     files = [file_1, file_2]
 
     result = Table.build_table(files)
@@ -40,22 +40,35 @@ defmodule TableTest do
     assert String.length(file_1_line) == String.length(file_2_line)
   end
 
-  test "the table columns have default width" do
-    file_1 = %FileStats{name: "file", line_count: 0, commits: 0}
+  test "the table columns display all the values" do
+    datetime = DateTime.utc_now
+    file_1 = build_filestat("file", 1, 2, datetime)
     files = [file_1]
 
     result = Table.build_table(files) |> extract_line_at_position(1)
 
-    assert result =~ "file   |       0       |       0"
+    assert result =~ "file"
+    assert result =~ "1"
+    assert result =~ "2"
+    assert result =~ DateTime.to_string(datetime)
   end
 
   test "the name of the file is cleaned if its at the top level directory" do
-    file_1 = %FileStats{name: "./file", line_count: 0, commits: 0}
+    file_1 = build_filestat("./file", 0, 0)
     files = [file_1]
 
     result = Table.build_table(files) |> extract_line_at_position(1)
 
     refute result =~ "./"
+  end
+
+  defp build_filestat(name, line_count, commits, datetime \\ DateTime.utc_now) do
+    %FileStats{
+      name: name,
+      line_count: line_count,
+      commits: commits,
+      datetime: datetime
+    }
   end
 
   defp extract_line_at_position(lines, position) do

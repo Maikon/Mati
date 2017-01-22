@@ -1,5 +1,7 @@
 defmodule Mati.Screen do
   @gitignore Path.absname(".gitignore")
+  @ignored_files [".git", ".gitignore"]
+  @ignored_patterns ["png", "jpg", "jpeg", "svg"]
 
   alias Mati.BuildFileList
   alias Mati.FileStats
@@ -20,6 +22,7 @@ defmodule Mati.Screen do
     BuildFileList.execute(directory, ignored_files, ignored_patterns)
     |> FileStats.convert_from_regular_files
     |> FileStats.sort_by_churn
+    |> FileStats.sort_by_date
     |> Table.build_table
   end
 
@@ -29,6 +32,11 @@ defmodule Mati.Screen do
     ignored_patterns = ArgumentsParser.extract_ignored_patterns(args)
     number_of_files = ArgumentsParser.extract_number_of_files(args)
 
-    {directory, ignored_files ++ [".git"], ignored_patterns, number_of_files}
+    {
+      directory,
+      ignored_files ++ @ignored_files,
+      ignored_patterns ++ @ignored_patterns,
+      number_of_files
+    }
   end
 end

@@ -1,7 +1,7 @@
 defmodule Mati.Table do
   alias IO.ANSI
   require Integer
-  @default_max_width 15
+  @default_max_width 22
 
   def build_table(files) do
     longest_filename = longest_filename_with_padding(files)
@@ -19,6 +19,8 @@ defmodule Mati.Table do
       <> build_column(to_string(file.line_count))
       <> "|"
       <> build_column(to_string(file.commits))
+      <> "|"
+      <> build_column(DateTime.to_string(file.datetime))
       <> "\n"
       <> yellow(replicate("-", header_size))
       <> "\n"
@@ -43,9 +45,12 @@ defmodule Mati.Table do
     <> cyan(build_column("Line Count"))
     <> "|"
     <> cyan(build_column("Commits"))
+    <> "|"
+    <> cyan(build_column("Last Modified"))
 
     header_size = String.length(header)
-    header_with_separator = header <> "\n" <> yellow(replicate("=", header_size)) <> "\n"
+    header_with_separator = yellow(replicate("=", header_size)) <> "\n" <>
+    header <> "\n" <> yellow(replicate("=", header_size)) <> "\n"
 
     {header_size, header_with_separator}
   end
@@ -55,32 +60,16 @@ defmodule Mati.Table do
   end
 
   defp build_column(column_value, max_width \\ @default_max_width) do
-    padding_to_be_added(column_value, max_width)
-    |> construct_column
-  end
-
-  defp padding_to_be_added(column_value, max_width) do
     remaining_space = max_width - String.length(column_value)
     padding = div(remaining_space, 2)
     extra_padding = rem(remaining_space, 2)
 
-    {column_value, padding, extra_padding}
-  end
-
-  defp construct_column({column_value, padding, extra_padding = 0}) do
-    column(column_value, padding, extra_padding)
-  end
-
-  defp construct_column({column_value, padding, extra_padding}) do
-    column(column_value, padding, extra_padding)
-  end
-
-  defp column(column_value, padding, extra_padding) do
     replicate(" ", padding)
     <> column_value
     <> replicate(" ", padding + extra_padding)
   end
 
+  defp replicate(symbol, count) when count < 0, do: String.duplicate(symbol, 5)
   defp replicate(symbol, count), do: String.duplicate(symbol, count)
 
   defp cyan(str), do: colourize(ANSI.cyan, str)
