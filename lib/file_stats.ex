@@ -3,9 +3,9 @@ defmodule Mati.FileStats do
 
   def convert_from_regular_files(files) do
     files
-    |> Experimental.Flow.from_enumerable()
-    |> Experimental.Flow.partition()
-    |> Experimental.Flow.map(fn(file) ->
+    |> Flow.from_enumerable()
+    |> Flow.partition()
+    |> Flow.map(fn(file) ->
         %Mati.FileStats{name: name(file),
                         commits: commits(file),
                         line_count: lines(file),

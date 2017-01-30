@@ -21,7 +21,7 @@ defmodule Mati.Mixfile do
 
   defp deps do
     [
-      {:gen_stage, "~> 0.4"}
+      {:flow, "~> 0.11"}
     ]
   end
 end
