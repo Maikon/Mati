@@ -20,7 +20,7 @@ Then switch to the project directory and run the installation script:
 sh install.sh
 ```
 
-This will create an executable and add it to your path under `/usr/local/bin`.
+This will create an executable and add it to your path under `/usr/local/bin`
 
 ## Usage
 
@@ -41,4 +41,4 @@ The files as they appear on the table are sorted based on two things:
 I built this project to make working with legacy projects and identifying key files easier.
 
 It is inspired by the work of [Adam Tornhill](https://twitter.com/AdamTornhill) on analysing codebases using forensic psychology. For more in depth tooling and insights I would recommend
-watching [his talks](https://www.youtube.com/results?search_query=adam+tornhill) and checking out [his work](https://codescene.io)
+watching [his talks](https://www.youtube.com/results?search_query=adam+tornhill) and checking out [his work](https://codescene.io).
