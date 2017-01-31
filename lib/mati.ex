@@ -9,15 +9,15 @@ defmodule Mati do
     IO.puts """
     Usage:
 
-    1. mati --target .
+    1. mati --target lib
 
-    2. mati --target . --ignore png,jpg,txt
+    2. mati --target lib --ignore png,jpg,txt
 
     3. mati --target lib --files 20
 
-    4. mati --target lib --files all
+    4. mati --files all
 
-    5. mati --target . --ignore png,jpg --files all
+    5. mati --target test --ignore png,jpg --files all
     """
   end
 

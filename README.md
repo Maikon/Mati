@@ -14,15 +14,22 @@ The project assumes you have Elixir (__1.4.0__) and Erlang (__19__) installed. F
 git clone git@github.com:Maikon/Mati.git
 ```
 
-Then switch to the project directory and run the installation script:
+Then switch to the Mati directory and run the installation script:
 
 ```
+cd Mati
+
 sh install.sh
 ```
 
 This will create an executable and add it to your path under `/usr/local/bin`
 
 ## Usage
+
+The files as they appear on the table are sorted based on two things:
+
+1. First the files are sorted by their churn. This is the relationship between the lines in a file and the number of commits that have changed that file
+2. The above result then gets the sorted by the files that were modified most recently
 
 Mati will use the defaults when it's run without any flags. The available flags are:
 
@@ -31,10 +38,24 @@ Mati will use the defaults when it's run without any flags. The available flags 
 3. `--files`  - number of files to show (defaults to 10)
 4. `--help`   - show example usage
 
-The files as they appear on the table are sorted based on two things:
+Here's some examples using the flags:
 
-1. First the files are sorted by their churn. This is the relationship between the lines in a file and the number of commits that have changed that file
-2. The above result then gets the sorted by the files that were modified most recently
+```
+# target the lib directory only
+mati --target lib
+
+# target the lib directory and ignore any png,jpg,txt files
+mati --target lib --ignore png,jpg,txt
+
+# target the lib directory and limit the output to 20 files
+mati --target lib --files 20
+
+# print all the files for the current directory
+mati --files all
+
+# print all the files for the test directory ignoring png and jpg
+mati --target test --ignore png,jpg --files all
+```
 
 ## Credit
 
