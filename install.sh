@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "Retrieving dependencies"
+mix deps.get
+
 echo "Generating executable"
 mix escript.build
 
