@@ -18,3 +18,5 @@ erl_crash.dump
 program_flow.umd
 .DS_Store
 
+# Executable
+mati
